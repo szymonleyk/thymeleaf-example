@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+</head>
+<body>
+
+    <h1>Employees</h1>
+    <a href="/add-employee">Add</a>
+
+    <table style="width:100%">
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>surname</th>
+            <th>birthdate</th>
+            <th>description</th>
+            <th>salary</th>
+            <th></th>
+        </tr>
+        <tr th:each="employee : ${employees}">
+            <td><span th:text="${employee.id}"></span></td>
+            <td><span th:text="${employee.name}"></span></td>
+            <td><span th:text="${employee.surname}"></span></td>
+            <td><span th:text="${employee.birthdate}"></span></td>
+            <td><span th:text="${employee.description}"></span></td>
+            <td><span th:text="${employee.salary}"></span></td>
+            <td>
+                <form action="/delete-employee" method="post">
+                    <input id="id" name="id" th:value="${employee.id}" hidden/>
+                    <button>DELETE</button>
+                </form>
+                <a th:href="@{'/edit-employee/'+${employee.id}}">EDIT</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
